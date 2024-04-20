@@ -25,6 +25,8 @@ function App() {
 
   const onSignOut = async () => {
     await signOut(auth);
+    setUser(null); // Clear user data
+    setAuthenticated(false); // Reset authenticated state
   }
 
   return (
