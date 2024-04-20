@@ -11,19 +11,19 @@ function PostDetails({post}) {
       comments.push({ text: commentText }); // Update local state for demo
     };
   
-    // useEffect(() => {
-    //   // Simulate fetching comments from server (replace with actual API call)
-    //   setComments([
-    //     { text: 'Comment 1' },
-    //     { text: 'Comment 2' },
-    //   ]);
-    // }, [post.id]); // Fetch comments only when post changes
+    useEffect(() => {
+      // Simulate fetching comments from server (replace with actual API call)
+      setComments([
+        { text: 'Comment 1' },
+        { text: 'Comment 2' },
+      ]);
+    }, [post.id]); // Fetch comments only when post changes
   
     return (
       <body>
         <div className="post">
-          <h2>Title</h2>
-          <p>Text</p>
+        <h2>{post.title}</h2>
+        <p>{post.text}</p>
           <h3>Comments</h3>
           <ul>
             {comments.map((comment) => (
