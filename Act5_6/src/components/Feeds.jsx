@@ -34,7 +34,12 @@ const Feeds = () => {
       }
     }
   };
-
+const handlePostClick = (postId) => {
+  // Pass the clicked post ID to the parent component (App.js) through props
+  if (props.onPostClick) {
+    props.onPostClick(postId);
+  }
+};
   return (
     <div className="feeds-container">
       <div className="post-input">
@@ -52,13 +57,12 @@ const Feeds = () => {
         <button onClick={handlePostSubmit}>Post</button>
       </div>
       <div className="posts">
-        {posts.map((post) => (
-          <div key={post.id} className="post">
-            <p>{post.text}</p>
-            {post.image && <img src={post.image} alt="Posted" />}
-          </div>
-        ))}
+    {posts.map((post) => (
+      <div key={post.id} className="post" onClick={() => handlePostClick(post.id)}>
+        {/* ... existing post content ... */}
       </div>
+    ))}
+    </div>
     </div>
   );
 };
