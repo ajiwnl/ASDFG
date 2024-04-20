@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import './Feeds.css';
 
 const Feeds = () => {
@@ -20,6 +21,7 @@ const Feeds = () => {
       reader.onload = () => {
         const newPostObj = {
           id: Date.now(),
+          title: "Post Title", // Example title, replace with actual title
           text: newPost,
           image: reader.result,
         };
@@ -34,12 +36,7 @@ const Feeds = () => {
       }
     }
   };
-const handlePostClick = (postId) => {
-  // Pass the clicked post ID to the parent component (App.js) through props
-  if (props.onPostClick) {
-    props.onPostClick(postId);
-  }
-};
+
   return (
     <div className="feeds-container">
       <div className="post-input">
@@ -57,12 +54,17 @@ const handlePostClick = (postId) => {
         <button onClick={handlePostSubmit}>Post</button>
       </div>
       <div className="posts">
-    {posts.map((post) => (
-      <div key={post.id} className="post" onClick={() => handlePostClick(post.id)}>
-        {/* ... existing post content ... */}
+        {posts.map((post) => (
+          <div key={post.id} className="post">
+            <h2>{post.title}</h2>
+            <p>{post.text}</p>
+            {/* Wrap the image with Link component */}
+            <Link to={`/post-details/${post.id}`}>
+              <img src={post.image} alt="Posted" />
+            </Link>
+          </div>
+        ))}
       </div>
-    ))}
-    </div>
     </div>
   );
 };
